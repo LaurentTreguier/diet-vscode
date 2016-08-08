@@ -5,7 +5,11 @@
     "version": "0.1.0",
     "publisher": "LaurentTreguier",
     "license": "SEE LICENSE IN LICENSE",
-    "icon": "images/vibed-dark.png",
+    "icon": "images/vibed.png",
+    "galleryBanner": {
+        "color": "#B7D3DF",
+        "theme": "light"
+    },
     "homepage": "https://github.com/LaurentTreguier/diet-vscode",
     "bugs": {
         "url": "https://github.com/LaurentTreguier/diet-vscode/issues"
