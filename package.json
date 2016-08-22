@@ -19,10 +19,11 @@
         "url": "https://github.com/LaurentTreguier/diet-vscode.git"
     },
     "keywords": [
-        "diet",
         "template",
         "vibed",
-        "vibe"
+        "vibe",
+        "dlang",
+        "d"
     ],
     "engines": {
         "vscode": "^1.0.0"
