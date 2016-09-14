@@ -2,7 +2,7 @@
     "name": "diet",
     "displayName": "Diet Templates",
     "description": "Support for vibe.d diet templates (http://vibed.org/templates/diet)",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "LaurentTreguier",
     "license": "SEE LICENSE IN LICENSE",
     "icon": "images/vibed.png",
