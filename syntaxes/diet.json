@@ -5,207 +5,204 @@
     ],
     "patterns": [
         {
-            "name": "comment.line.doube-slash",
-            "match": "//.*"
-        },
-        {
-            "match": "^\\s*-\\s*(.+)",
+            "name": "comment.line.double-slash.diet",
+            "match": "(//-?).*",
             "captures": {
                 "1": {
+                    "name": "punctuation.definition.comment.d"
+                }
+            }
+        },
+        {
+            "match": "^\\s*(-)\\s*(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.diet"
+                },
+                "2": {
                     "patterns": [
                         {
-                            "include": "#dlang"
+                            "include": "source.d"
                         }
                     ]
                 }
             }
         },
         {
-            "name": "meta.tag.doctype.diet",
-            "match": "^doctype\\s+\\S+"
-        },
-        {
-            "match": "^\\s*(include|extends)\\s*(\\S*)",
+            "match": "^\\s*(\\|)(.*)",
             "captures": {
                 "1": {
-                    "name": "storage.type.import.diet"
+                    "name": "keyword.operator.diet"
                 },
                 "2": {
-                    "name": "variable.other.import.diet"
+                    "patterns": [
+                        {
+                            "include": "#tag-content"
+                        }
+                    ]
                 }
             }
         },
         {
-            "begin": "(\\s*):(css)",
-            "end": "^(?!\\1\\s)(?=[\\t ]*\\S)",
+            "match": "\\b(doctype)\\s+(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.doctype.diet"
+                },
+                "2": {
+                    "name": "entity.name.section.diet"
+                }
+            }
+        },
+        {
+            "match": "^\\s*(block|extends|include)\\s+(\\w+)",
+            "captures": {
+                "1": {
+                    "name": "storage.type.diet"
+                },
+                "2": {
+                    "name": "variable.other.diet"
+                }
+            }
+        },
+        {
+            "begin": "(\\s*)(:)(css)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
             "beginCaptures": {
                 "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
                     "name": "entity.name.tag.filter.css.diet"
                 }
             },
-            "patterns": [
-                {
-                    "include": "#css"
-                }
-            ]
-        },
-        {
-            "begin": "(\\s*):(javascript)",
-            "end": "^(?!\\1\\s)(?=[\\t ]*\\S)",
-            "beginCaptures": {
-                "2": {
-                    "name": "entity.name.tag.filter.javascript.diet"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#javascript"
-                }
-            ]
-        },
-        {
-            "begin": "(\\s*):(markdown)",
-            "end": "^(?!\\1\\s)(?=[\\t ]*\\S)",
-            "beginCaptures": {
-                "2": {
-                    "name": "entity.name.tag.filter.markdown.diet"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#markdown"
-                }
-            ]
-        },
-        {
-            "begin": "(\\s*):(htmlescape)",
-            "end": "^(?!\\1\\s)(?=[\\t ]*\\S)",
-            "beginCaptures": {
-                "2": {
-                    "name": "entity.name.tag.filter.htmlescape.diet"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#text"
-                }
-            ]
-        },
-        {
-            "patterns": [
-                {
-                    "include": "#tag"
-                }
-            ]
-        }
-    ],
-    "repository": {
-        "dlang": {
-            "patterns": [
-                {
-                    "include": "source.d"
-                }
-            ]
-        },
-        "css": {
             "patterns": [
                 {
                     "include": "source.css"
                 }
             ]
         },
-        "javascript": {
+        {
+            "begin": "(\\s*)(:)(htmlescape)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.htmlescape.diet"
+                }
+            }
+        },
+        {
+            "begin": "(\\s*)(:)(javascript)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.javascript.diet"
+                }
+            },
             "patterns": [
                 {
                     "include": "source.js"
                 }
             ]
         },
-        "markdown": {
+        {
+            "begin": "(\\s*)(:)(markdown)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.markdown.diet"
+                }
+            },
             "patterns": [
                 {
                     "include": "text.html.markdown"
                 }
             ]
         },
-        "text": {
-            "patterns": [
-                {
-                    "include": "text.plain"
-                }
-            ]
-        },
-        "tag": {
-            "match": "(?<=^)\\s*((?:\\w[\\w\\-]*)|\\|)?([\\w\\-#.]*\\w)?(\\((?:[\\w\\-]+(?:\\s*=\\s*(\"|').*?(?<!\\\\)\\4)?,?\\s*)+\\))?([\\w\\-#.]*\\w)?([<>]{0,2})(?:(!?=)\\s*(.+))?(.*)",
+        {
+            "name": "meta.tag.diet",
+            "match": "^\\s*([-:\\w]+)?(?:(#)([-\\w]+))?((?:\\.[-\\w]+)*)(?<=\\S)(.*)",
             "captures": {
                 "1": {
                     "name": "entity.name.tag.diet"
                 },
                 "2": {
-                    "patterns": [
-                        {
-                            "include": "#special-attribute"
-                        }
-                    ]
+                    "name": "storage.type.id.diet"
                 },
                 "3": {
+                    "name": "entity.name.id.diet"
+                },
+                "4": {
                     "patterns": [
                         {
-                            "include": "#normal-attribute"
+                            "name": "storage.type.class.diet",
+                            "match": "\\."
+                        },
+                        {
+                            "name": "entity.name.class.diet",
+                            "match": "."
                         }
                     ]
                 },
                 "5": {
                     "patterns": [
                         {
-                            "include": "#special-attribute"
-                        }
-                    ]
-                },
-                "6": {
-                    "name": "entity.name.tag.diet"
-                },
-                "7": {
-                    "name": "entity.name.tag.diet"
-                },
-                "8": {
-                    "patterns": [
-                        {
-                            "include": "#dlang"
-                        }
-                    ]
-                },
-                "9": {
-                    "patterns": [
-                        {
-                            "include": "#interpolated"
+                            "match": "\\s+.*",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#tag-content"
+                                        }
+                                    ]
+                                }
+                            }
                         },
                         {
-                            "include": "#html-characters"
+                            "include": "#tag-attributes"
                         }
                     ]
                 }
             }
+        }
+    ],
+    "repository": {
+        "escaped-char": {
+            "name": "constant.character.escape.diet",
+            "match": "\\\\."
         },
-        "normal-attribute": {
-            "match": "(?:\\(|,)\\s*([\\w\\-]+)(?:\\s*=\\s*((\"|').*?(?<![^\\\\]\\\\)\\3))?",
-            "captures": {
-                "1": {
-                    "name": "entity.other.attribute-name.diet"
+        "tag-attributes": {
+            "begin": "\\(",
+            "end": "\\)(.*)",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.begin.diet"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.end.diet"
                 },
-                "2": {
+                "1": {
                     "patterns": [
                         {
-                            "include": "#string"
+                            "include": "#tag-content"
                         }
                     ]
                 }
-            }
-        },
-        "special-attribute": {
+            },
             "patterns": [
                 {
-                    "match": "#([\\w\\-]+)\\b",
+                    "match": "\\b(\\w+)\\b",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.diet"
@@ -213,49 +210,124 @@
                     }
                 },
                 {
-                    "match": "\\.([\\w\\-]+)\\b",
+                    "begin": "=",
+                    "end": "(?=,|\\))",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.operator.assignment.diet"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "name": "constant.language.boolean.diet",
+                            "match": "\\b(false|true)\\b"
+                        },
+                        {
+                            "name": "string.quoted.single.diet",
+                            "match": "(')[^']*(')",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#escaped-char"
+                                        },
+                                        {
+                                            "include": "#string-interpolation"
+                                        }
+                                    ]
+                                },
+                                "1": {
+                                    "name": "punctuation.definition.string.begin.diet"
+                                },
+                                "2": {
+                                    "name": "punctuation.definition.string.end.diet"
+                                }
+                            }
+                        },
+                        {
+                            "name": "string.quoted.double.diet",
+                            "match": "(\")[^\"]+(\")",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#escaped-char"
+                                        },
+                                        {
+                                            "include": "#string-interpolation"
+                                        }
+                                    ]
+                                },
+                                "1": {
+                                    "name": "punctuation.definition.string.begin.diet"
+                                },
+                                "2": {
+                                    "name": "punctuation.definition.string.end.diet"
+                                }
+                            }
+                        },
+                        {
+                            "include": "source.d"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tag-content": {
+            "patterns": [
+                {
+                    "match": "((?:<|>){0,2})(&)?(?:(!?=)(.*))?(.*)",
                     "captures": {
                         "1": {
-                            "name": "constant.other.name.attribute.diet"
+                            "name": "keyword.operator.whitespace-removal.diet"
+                        },
+                        "2": {
+                            "name": "keyword.operator.i18n.diet"
+                        },
+                        "3": {
+                            "name": "keyword.operator.diet"
+                        },
+                        "4": {
+                            "patterns": [
+                                {
+                                    "include": "source.d"
+                                }
+                            ]
+                        },
+                        "5": {
+                            "patterns": [
+                                {
+                                    "include": "#string-interpolation"
+                                },
+                                {
+                                    "name": "constant.character.diet",
+                                    "match": "&\\w+;"
+                                }
+                            ]
                         }
                     }
                 }
             ]
         },
-        "string": {
-            "name": "string.quoted.double.diet",
-            "begin": "(\"|')",
-            "end": "\\1",
-            "patterns": [
-                {
-                    "include": "#escaped-char"
-                },
-                {
-                    "include": "#interpolated"
-                }
-            ]
-        },
-        "interpolated": {
-            "begin": "(#)\\{",
+        "string-interpolation": {
+            "name": "meta.template.expression.diet",
+            "begin": "(?<!\\\\)(?:#|!)\\{",
             "end": "\\}",
             "beginCaptures": {
-                "1": {
-                    "name": "keyword.operator.interpolator.diet"
+                "0": {
+                    "name": "punctuation.definition.template-expression.begin.diet"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.template-expression.end.diet"
                 }
             },
             "patterns": [
                 {
-                    "include": "#dlang"
+                    "include": "source.d"
                 }
             ]
-        },
-        "escaped-char": {
-            "name": "constant.character.escape.diet",
-            "match": "\\\\."
-        },
-        "html-characters": {
-            "name": "constant.character.diet",
-            "match": "&\\w+;"
         }
     }
 }
