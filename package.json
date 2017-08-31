@@ -52,5 +52,8 @@
                 "path": "./syntaxes/diet.json"
             }
         ]
+    },
+    "devDependencies": {
+        "vsce": "^1.30.0"
     }
 }
